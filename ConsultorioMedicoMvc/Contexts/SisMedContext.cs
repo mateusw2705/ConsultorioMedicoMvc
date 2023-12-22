@@ -16,6 +16,11 @@ namespace ConsultorioMedicoMvc.Contexts
 
         public DbSet<Medico> Medicos => Set<Medico>();
         public DbSet<Paciente> Pacientes => Set<Paciente>();
+        public DbSet<InformacoesComplementaresPaciente> InformacoesComplementaresPaciente => Set<InformacoesComplementaresPaciente>();
+        public DbSet<MonitoramentoPaciente> MonitoramentoPacientes => Set<MonitoramentoPaciente>();
+        public DbSet<Consulta> Consultas => Set<Consulta>();
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_configuration.GetConnectionString("SisMed"));
@@ -25,6 +30,9 @@ namespace ConsultorioMedicoMvc.Contexts
         {
             modelBuilder.ApplyConfiguration(new MedicoConfiguration());
             modelBuilder.ApplyConfiguration(new PacienteConfiguration());
+            modelBuilder.ApplyConfiguration(new InfoComplementarPacienteConfiguration());
+            modelBuilder.ApplyConfiguration(new MonitoramentoPacienteConfiguration());
+            modelBuilder.ApplyConfiguration(new ConsultaConfiguration());
         }
     }
 }

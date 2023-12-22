@@ -75,15 +75,20 @@ namespace ConsultorioMedicoMvc.Controllers
         public IActionResult Editar(int id)
         {
             var paciente = _context.Pacientes.Find(id);
-
             if (paciente != null)
             {
+                 var InfoComplementar =_context.InformacoesComplementaresPaciente
+                    .FirstOrDefault(x => x.IdPaciente == id);
+
                 return View(new EditarPacienteViewModel
                 {
                     CPF = paciente.CPF,
                     Id = paciente.Id,
                     Nome = paciente.Nome,
-                    DataNascimento = paciente.DataNascimento
+                    DataNascimento = paciente.DataNascimento,
+                    Alergias =  InfoComplementar?.Alergias,
+                    CirurgiasRealizadas = InfoComplementar?.CirurgiasRealizadas,
+                    MedicamentosEmUso = InfoComplementar?.MedicamentosEmUso
 
                 });
             }
@@ -108,6 +113,22 @@ namespace ConsultorioMedicoMvc.Controllers
                 paciente.CPF = Regex.Replace(dados.CPF, "[^0-9 ]", "");
                 paciente.Nome = dados.Nome;
                 paciente.DataNascimento = dados.DataNascimento;
+
+
+                var informacoesComplementares = _context.InformacoesComplementaresPaciente.FirstOrDefault(x => x.IdPaciente == id);
+
+                if (informacoesComplementares == null)
+                    informacoesComplementares = new InformacoesComplementaresPaciente();
+
+                informacoesComplementares.Alergias = dados.Alergias;
+                informacoesComplementares.MedicamentosEmUso = dados.MedicamentosEmUso;
+                informacoesComplementares.CirurgiasRealizadas = dados.CirurgiasRealizadas;
+                informacoesComplementares.IdPaciente = id;
+
+                if (informacoesComplementares.Id > 0)
+                    _context.InformacoesComplementaresPaciente.Update(informacoesComplementares);
+                else
+                    _context.InformacoesComplementaresPaciente.Add(informacoesComplementares);
 
                 _context.Pacientes.Update(paciente);
                 _context.SaveChanges();

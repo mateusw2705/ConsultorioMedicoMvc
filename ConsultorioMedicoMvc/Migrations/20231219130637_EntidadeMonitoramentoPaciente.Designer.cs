@@ -4,6 +4,7 @@ using ConsultorioMedicoMvc.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsultorioMedicoMvc.Migrations
 {
     [DbContext(typeof(SisMedContext))]
-    partial class SisMedContextModelSnapshot : ModelSnapshot
+    [Migration("20231219130637_EntidadeMonitoramentoPaciente")]
+    partial class EntidadeMonitoramentoPaciente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,35 +24,6 @@ namespace ConsultorioMedicoMvc.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ConsultorioMedicoMvc.Models.Entities.Consulta", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IdMedico")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdPaciente")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Tipo")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdMedico");
-
-                    b.HasIndex("IdPaciente");
-
-                    b.ToTable("Consultas", (string)null);
-                });
 
             modelBuilder.Entity("ConsultorioMedicoMvc.Models.Entities.InformacoesComplementaresPaciente", b =>
                 {
@@ -172,25 +146,6 @@ namespace ConsultorioMedicoMvc.Migrations
                     b.ToTable("Pacientes", (string)null);
                 });
 
-            modelBuilder.Entity("ConsultorioMedicoMvc.Models.Entities.Consulta", b =>
-                {
-                    b.HasOne("ConsultorioMedicoMvc.Models.Entities.Medico", "Medico")
-                        .WithMany("Consultas")
-                        .HasForeignKey("IdMedico")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ConsultorioMedicoMvc.Models.Entities.Paciente", "Paciente")
-                        .WithMany("Consultas")
-                        .HasForeignKey("IdPaciente")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Medico");
-
-                    b.Navigation("Paciente");
-                });
-
             modelBuilder.Entity("ConsultorioMedicoMvc.Models.Entities.InformacoesComplementaresPaciente", b =>
                 {
                     b.HasOne("ConsultorioMedicoMvc.Models.Entities.Paciente", "Paciente")
@@ -213,15 +168,8 @@ namespace ConsultorioMedicoMvc.Migrations
                     b.Navigation("Paciente");
                 });
 
-            modelBuilder.Entity("ConsultorioMedicoMvc.Models.Entities.Medico", b =>
-                {
-                    b.Navigation("Consultas");
-                });
-
             modelBuilder.Entity("ConsultorioMedicoMvc.Models.Entities.Paciente", b =>
                 {
-                    b.Navigation("Consultas");
-
                     b.Navigation("InformacoesComplementares");
 
                     b.Navigation("Monitoramentos");

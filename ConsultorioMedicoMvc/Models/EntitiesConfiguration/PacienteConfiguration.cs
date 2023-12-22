@@ -29,10 +29,13 @@ namespace ConsultorioMedicoMvc.Models.EntitiesConfiguration
 
             //define relacionamento entre paciente e infocomplementar
 
-            builder.HasOne(P => P.InformacoesComplementares)
+            builder.HasOne(p => p.InformacoesComplementares)
                    .WithOne(i => i.Paciente)
                    .HasForeignKey<InformacoesComplementaresPaciente>(i => i.IdPaciente);
 
+            builder.HasMany(p => p.Monitoramentos)
+                  .WithOne(m => m.Paciente)
+                  .HasForeignKey(m => m.IdPaciente);
 
         }
     }

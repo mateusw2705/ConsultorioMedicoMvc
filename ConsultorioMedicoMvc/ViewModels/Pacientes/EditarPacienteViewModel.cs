@@ -12,5 +12,16 @@ namespace ConsultorioMedicoMvc.ViewModels.Pacientes
         [Display(Name = "Data de Nascimnto")]
         [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
+
+        public string? Alergias { get; set; }
+
+
+        [Display(Name = "Medicamentos em Uso")]
+        public string? MedicamentosEmUso { get; set; }
+
+
+        [Display(Name = "Cirugias Realizadas")]
+        public string? CirurgiasRealizadas { get; set; }
+
     }
 }
