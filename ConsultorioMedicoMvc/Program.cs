@@ -1,7 +1,9 @@
 using ConsultorioMedicoMvc.Contexts;
+using ConsultorioMedicoMvc.Validators.Consultas;
 using ConsultorioMedicoMvc.Validators.Medicos;
 using ConsultorioMedicoMvc.Validators.MonitoramentoPaciente;
 using ConsultorioMedicoMvc.Validators.Pacientes;
+using ConsultorioMedicoMvc.ViewModels.Consultas;
 using ConsultorioMedicoMvc.ViewModels.Medicos;
 using ConsultorioMedicoMvc.ViewModels.MonitoramentoPaciente;
 using ConsultorioMedicoMvc.ViewModels.Pacientes;
@@ -20,6 +22,9 @@ builder.Services.AddScoped<IValidator<EditarPacienteViewModel>, EditarPacienteVa
 
 builder.Services.AddScoped<IValidator<AdicionarMonitoramentoViewModel>, AdicionarMonitoramentoValidator>();
 builder.Services.AddScoped<IValidator<EditarMonitoramentoViewModel>, EditarMonitoramentoValidator>();
+
+builder.Services.AddScoped<IValidator<AdicionarConsultaViewModel>, AdicionarConsultaValidator>();
+builder.Services.AddScoped<IValidator<EditarConsultaViewModel>, EditarConsultaValidator>();
 
 builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes =  true);
 

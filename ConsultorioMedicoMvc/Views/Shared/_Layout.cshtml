@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Blank Page</title>
+    <title>Sistema Médico</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -74,6 +74,25 @@
                            
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-laptop-medical"></i>
+                                <p>
+                                    Operaçoes
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/consultas" class="nav-link">
+                                        <i class="fas fa-notes-medical nav-icon"></i>
+                                        <p>Consultas</p>
+                                    </a>
+                                </li>
+                              
+
+                            </ul>
+                        </li>
                        
                     </ul>
                 </nav>
@@ -117,7 +136,6 @@
             })
         });
     </script>
-
-   
+    @RenderSection("scripts", false)
 </body>
 </html>
